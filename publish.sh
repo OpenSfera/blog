@@ -14,17 +14,20 @@ jekyll build
 if [ -d "./_site" ]; then
   mv ./_site $WORKPLACE
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  git checkout gh-pages
-  ls | xargs rm -rf
-  mv $WORKPLACE/_site/* .
-  git add -A
-  git commit -m "[`whoami`] on @`date +%Y-%m-%d_%H:%M`@ publish those weird posts"
-  if git push origin gh-pages; then
-    echo "DEPLOYED"
+  if git checkout gh-pages; then
+    ls | xargs rm -rf
+    mv $WORKPLACE/_site/* .
+    git add -A
+    git commit -m "[`whoami`] on @`date +%Y-%m-%d_%H:%M`@ publish those weird posts"
+    if git push origin gh-pages; then
+      echo "PUBLISH: deployed"
+    else
+      echo "PUBLISH: deploy fail"
+    fi
+    git checkout $CURRENT_BRANCH
   else
-    echo "DEPLOY FAIL"
+    echo "PUBLISH: You should commit changes before publishing"
   fi
-  git checkout $CURRENT_BRANCH
   else
-    echo "BUILD FAIL"
+    echo "PUBLISH: build fail"
 fi
