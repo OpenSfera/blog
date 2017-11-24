@@ -1,4 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="https://opensfera.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://opensfera.github.io/blog/" rel="alternate" type="text/html" /><updated>2017-11-24T09:36:10+01:00</updated><id>https://opensfera.github.io/blog/</id><title type="html">OpenSfera</title><subtitle>growbox on your screen</subtitle><entry><title type="html">It’s time to start</title><link href="https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin.html" rel="alternate" type="text/html" title="It's time to start" /><published>2017-11-24T08:00:00+01:00</published><updated>2017-11-24T08:00:00+01:00</updated><id>https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin</id><content type="html" xml:base="https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin.html">&lt;p&gt;&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_dashboard.png&quot; alt=&quot;inside&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="https://opensfera.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://opensfera.github.io/blog/" rel="alternate" type="text/html" /><updated>2017-11-24T16:25:47+01:00</updated><id>https://opensfera.github.io/blog/</id><title type="html">OpenSfera</title><subtitle>growbox on your screen</subtitle><entry><title type="html">Technology used</title><link href="https://opensfera.github.io/blog/beta-test/2017/11/24/system.html" rel="alternate" type="text/html" title="Technology used" /><published>2017-11-24T14:00:00+01:00</published><updated>2017-11-24T14:00:00+01:00</updated><id>https://opensfera.github.io/blog/beta-test/2017/11/24/system</id><content type="html" xml:base="https://opensfera.github.io/blog/beta-test/2017/11/24/system.html">&lt;p&gt;&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_lamp.png&quot; alt=&quot;light&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The list of &lt;em&gt;stuff&lt;/em&gt; used to run a Sfera. I think to add and remove some part, to improve
+existent and… well, all the usual bla bla we are used to ear from developers :)&lt;/p&gt;
+
+&lt;h3 id=&quot;hardware&quot;&gt;Hardware&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Raspberry Pi3 model B v2 (planning to try the Pi0w)&lt;/li&gt;
+  &lt;li&gt;Grow Light 7W&lt;/li&gt;
+  &lt;li&gt;Relay SDR-05VDC-SL-C&lt;/li&gt;
+  &lt;li&gt;DHT22 Temperature and Humidity Logger&lt;/li&gt;
+  &lt;li&gt;Reflective mylar film&lt;/li&gt;
+  &lt;li&gt;Simple forniture Box&lt;/li&gt;
+  &lt;li&gt;wiring cable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;software&quot;&gt;Software&lt;/h3&gt;
+
+&lt;p&gt;OS is NOOBS but every debian based distro should be ok.&lt;/p&gt;
+
+&lt;p&gt;All the software lay on a &lt;em&gt;mqtt&lt;/em&gt; system with a &lt;em&gt;mongodb&lt;/em&gt; to persist data.&lt;/p&gt;
+
+&lt;p&gt;There are three topics:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;local/status&lt;/strong&gt;: where the sensors publish the values read from the box&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;local/system&lt;/strong&gt;: where other apps publish some system changes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;local/alerts&lt;/strong&gt;: where apps publish problems on the system&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;on those topics there are many apps who live together. Please, think about them as a bunch actor
+who play a game.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;technician&lt;/strong&gt;: (python) the one in charge of the hardware. He turn on electrics and read sensors and publish on &lt;strong&gt;local/status&lt;/strong&gt; what’s going on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;reporter&lt;/strong&gt;: (python) the one who persist the system status.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;paramedic&lt;/strong&gt;: (nodejs) the one who tell &lt;em&gt;something is going wrong&lt;/em&gt; but he try to fix it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;insider&lt;/strong&gt;: (python) if &lt;em&gt;paramedic&lt;/em&gt; has very bad time he ask the human.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;alertByTelegram&lt;/strong&gt;: (python) this is a simple app, it ears for &lt;em&gt;insider&lt;/em&gt; and send a message on telegram&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;manager&lt;/strong&gt;: (python) the one in charge to change configurations&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;bestfriend&lt;/strong&gt;: (nodejs + express + react) he is your bestfriend. A web interface to hide all the works is done inside :P&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All the apps are built to do simple jobs. I wait to publish those apps because they are still embryonic
+and need a lot of configuration to works.&lt;/p&gt;
+
+&lt;h3 id=&quot;screenshots&quot;&gt;Screenshots&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;bestfriend&lt;/strong&gt; dashboard:
+&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_frontend_00.png&quot; alt=&quot;frontend dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;bestfriend&lt;/strong&gt; settings:
+&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_frontend_01.png&quot; alt=&quot;frontend settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;raspberry htop:
+&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_htop.png&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Please note.&lt;/strong&gt;
+This is all about making new experiences.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I know few things about growing plants.&lt;/li&gt;
+  &lt;li&gt;I know few things about electronics.&lt;/li&gt;
+  &lt;li&gt;I know little things about python.&lt;/li&gt;
+  &lt;li&gt;I know nothing about MQTT.&lt;/li&gt;
+  &lt;li&gt;I know something about ReactJS.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As I’m a software developer I mixed technology I already know with some new ones. That’s
+the way we learn new stuff… making big mistake I mean!
+If you spot something wrong, please, let me know.&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">It’s time to start</title><link href="https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin.html" rel="alternate" type="text/html" title="It's time to start" /><published>2017-11-24T08:00:00+01:00</published><updated>2017-11-24T08:00:00+01:00</updated><id>https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin</id><content type="html" xml:base="https://opensfera.github.io/blog/beta-test/2017/11/24/lets-begin.html">&lt;p&gt;&lt;img src=&quot;https://opensfera.github.io/blog/assets/images/day_00_dashboard.png&quot; alt=&quot;inside&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Day Zero. I put in the box:&lt;/p&gt;
 

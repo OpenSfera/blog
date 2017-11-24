@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Technology used</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/blog/assets/main.css">
+  <link rel="canonical" href="https://opensfera.github.io/blog/beta-test/2017/11/24/system.html">
+  <link rel="alternate" type="application/rss+xml" title="OpenSfera" href="/blog/feed.xml">
+
+  <link rel="shortcut icon" type="image/png" href="/assets/icon.png"/>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-110124968-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/blog/">OpenSfera</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/blog/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Technology used</h1>
+    <p class="post-meta">
+      <time datetime="2017-11-24T14:00:00+01:00" itemprop="datePublished">
+        
+        Nov 24, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><img src="https://opensfera.github.io/blog/assets/images/day_00_lamp.png" alt="light" /></p>
+
+<p>The list of <em>stuff</em> used to run a Sfera. I think to add and remove some part, to improve
+existent and… well, all the usual bla bla we are used to ear from developers :)</p>
+
+<h3 id="hardware">Hardware</h3>
+
+<ul>
+  <li>Raspberry Pi3 model B v2 (planning to try the Pi0w)</li>
+  <li>Grow Light 7W</li>
+  <li>Relay SDR-05VDC-SL-C</li>
+  <li>DHT22 Temperature and Humidity Logger</li>
+  <li>Reflective mylar film</li>
+  <li>Simple forniture Box</li>
+  <li>wiring cable</li>
+</ul>
+
+<h3 id="software">Software</h3>
+
+<p>OS is NOOBS but every debian based distro should be ok.</p>
+
+<p>All the software lay on a <em>mqtt</em> system with a <em>mongodb</em> to persist data.</p>
+
+<p>There are three topics:</p>
+<ul>
+  <li><strong>local/status</strong>: where the sensors publish the values read from the box</li>
+  <li><strong>local/system</strong>: where other apps publish some system changes</li>
+  <li><strong>local/alerts</strong>: where apps publish problems on the system</li>
+</ul>
+
+<p>on those topics there are many apps who live together. Please, think about them as a bunch actor
+who play a game.</p>
+
+<ul>
+  <li><strong>technician</strong>: (python) the one in charge of the hardware. He turn on electrics and read sensors and publish on <strong>local/status</strong> what’s going on.</li>
+  <li><strong>reporter</strong>: (python) the one who persist the system status.</li>
+  <li><strong>paramedic</strong>: (nodejs) the one who tell <em>something is going wrong</em> but he try to fix it.</li>
+  <li><strong>insider</strong>: (python) if <em>paramedic</em> has very bad time he ask the human.</li>
+  <li><strong>alertByTelegram</strong>: (python) this is a simple app, it ears for <em>insider</em> and send a message on telegram</li>
+  <li><strong>manager</strong>: (python) the one in charge to change configurations</li>
+  <li><strong>bestfriend</strong>: (nodejs + express + react) he is your bestfriend. A web interface to hide all the works is done inside :P</li>
+</ul>
+
+<p>All the apps are built to do simple jobs. I wait to publish those apps because they are still embryonic
+and need a lot of configuration to works.</p>
+
+<h3 id="screenshots">Screenshots</h3>
+
+<p><strong>bestfriend</strong> dashboard:
+<img src="https://opensfera.github.io/blog/assets/images/day_00_frontend_00.png" alt="frontend dashboard" /></p>
+
+<p><strong>bestfriend</strong> settings:
+<img src="https://opensfera.github.io/blog/assets/images/day_00_frontend_01.png" alt="frontend settings" /></p>
+
+<p>raspberry htop:
+<img src="https://opensfera.github.io/blog/assets/images/day_00_htop.png" alt="htop" /></p>
+
+<p><strong>Please note.</strong>
+This is all about making new experiences.</p>
+
+<ul>
+  <li>I know few things about growing plants.</li>
+  <li>I know few things about electronics.</li>
+  <li>I know little things about python.</li>
+  <li>I know nothing about MQTT.</li>
+  <li>I know something about ReactJS.</li>
+</ul>
+
+<p>As I’m a software developer I mixed technology I already know with some new ones. That’s
+the way we learn new stuff… making big mistake I mean!
+If you spot something wrong, please, let me know.</p>
+
+  </div>
+
+  
+    
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://opensfera.github.io/blog/beta-test/2017/11/24/system.html';
+      this.page.identifier = 'https://opensfera.github.io/blog/beta-test/2017/11/24/system.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://opensfera.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">OpenSfera</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              OpenSfera
+            
+            </li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>growbox on your screen</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+
+</html>

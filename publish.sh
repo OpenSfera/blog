@@ -9,7 +9,7 @@ WORKPLACE=$(mktemp -d)
 trap "rm -rf $WORKPLACE" EXIT
 
 jekyll clean
-jekyll build
+JEKYLL_ENV=production jekyll build
 
 if [ -d "./_site" ]; then
   mv ./_site $WORKPLACE
