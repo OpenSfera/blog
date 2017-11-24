@@ -13,7 +13,7 @@
   <link rel="shortcut icon" type="image/png" href="/assets/icon.png"/>
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 
-  {% if site.google_analytics %}
+  {% if site.google_analytics and jekyll.environment == "production" %}
   {% include google-analytics.html %}
   {% endif %}
 </head>
