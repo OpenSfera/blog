@@ -1,7 +1,7 @@
 title: OpenSfera
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  growbox in your screen
+  growbox on your screen
 baseurl: "/blog"
 url: "https://opensfera.github.io"
 twitter_username:
