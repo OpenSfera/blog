@@ -10,11 +10,13 @@ layout: default
     {% for post in site.posts %}
       <li>
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+        <a class="post-link" href="{{ post.url | relative_url }}">
         <span class="post-meta">{{ post.date | date: date_format }}</span>
-        {{ post.excerpt }}
+          {{ post.excerpt }}
         <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          {{ post.title | escape }}
         </h2>
+      </a>
       </li>
     {% endfor %}
   </ul>
